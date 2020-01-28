@@ -1,12 +1,19 @@
-<h1 style=" width: fit-content; margin: 10px auto 10px auto">Login</h1>
+<h1 style=" width: fit-content; margin: 50px auto 10px auto">Login</h1>
 <div class="form">
   <div class="form-group" >
-    <label for="email">Email address</label>
-    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
+    <label for="email">Email address:</label>
+    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" >
   </div>
   <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" placeholder="Password">
+    <label for="password">Password:</label>
+    <input type="password" class="form-control" id="password" >
   </div>
-  <button  class="btn btn-primary" id="logInButton" (click)="login()">Log in</button><br><br><button class="btn btn-primary" routerLink="newAccount">Register</button>
-</div>
+  <div style="text-align: center">
+  <button  class="btn btn-primary centerItem" id="logInButton" (click)="login()">
+    <div *ngIf="loading" class="d-flex justify-content-center">
+      <div class="spinner-border loader" role="status">
+      </div>
+    </div>
+    <span *ngIf="!loading">Log in</span></button><br><br><button class="btn btn-light centerItem" routerLink="newAccount">Register</button>
+  </div>
+  </div>

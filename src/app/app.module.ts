@@ -9,6 +9,9 @@ import { LoginComponent } from './login/login.component';
 import {AngularFireAuth} from '@angular/fire/auth';
 import { NewAccountComponent } from './new-account/new-account.component';
 import { ProfileComponent } from './profile/profile.component';
+import {NgbAlert, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {ReactiveFormsModule} from '@angular/forms';
+import {AlertService} from './shared/alert-service.service';
 
 @NgModule({
   declarations: [
@@ -20,9 +23,11 @@ import { ProfileComponent } from './profile/profile.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase, 'FirebaseApp')
+    AngularFireModule.initializeApp(environment.firebase, 'FirebaseApp'),
+    NgbModule,
+    ReactiveFormsModule
   ],
-  providers: [AngularFirestoreModule, AngularFireAuth],
+  providers: [AngularFirestoreModule, AngularFireAuth, AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

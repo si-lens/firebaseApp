@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import {Router} from '@angular/router';
+import {AlertService} from '../shared/alert-service.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,9 +10,11 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public afAuth: AngularFireAuth, private router: Router) {
+  constructor(public afAuth: AngularFireAuth, private router: Router, private alertService: AlertService) {
   }
+  loading: boolean;
   ngOnInit() {
+    this.loading = false;
   }
   login() {
     const emailInput: HTMLInputElement = document.getElementById('email') as HTMLInputElement;
@@ -20,10 +23,14 @@ export class LoginComponent implements OnInit {
 
 
     logInButton.addEventListener('click', e => {
+      this.loading = true
       const email = emailInput.value;
       const password = passwordInput.value;
       this.afAuth.auth.signInWithEmailAndPassword(email, password).
-      catch(er => console.log(er.message));
+      catch(er => {
+        this.alertService.errorMessageShow(er.message + ' Try again.');
+        this.loading = false;
+      });
     });
 
     this.afAuth.auth.onAuthStateChanged(firebaseUser => {
@@ -35,4 +42,5 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
 }

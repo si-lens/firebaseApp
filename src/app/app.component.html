@@ -1,2 +1,4 @@
+<ngb-alert *ngIf="this.alertService.errorMessage" type="danger" (close)="this.alertService.errorMessage = null" style="z-index: 2; position: absolute; width: 100%; top: 0; ">{{ this.alertService.errorMessage }}</ngb-alert>
+<ngb-alert *ngIf="this.alertService.successMessage" type="success" (close)="this.alertService.successMessage = null" style="z-index: 2; position: absolute; width: 100%; top: 0;">{{ this.alertService.successMessage }}</ngb-alert>
 
 <router-outlet></router-outlet>
