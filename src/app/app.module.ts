@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
-import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {NgbAlert, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -20,7 +20,7 @@ import {AlertService} from './shared/alert-service.service';
     AngularFireModule.initializeApp(environment.firebase, 'FirebaseApp'),
     NgbModule,
   ],
-  providers: [],
+  providers: [AngularFirestoreModule, AngularFireAuth, AlertService, AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

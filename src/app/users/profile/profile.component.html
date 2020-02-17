@@ -1,2 +1,9 @@
 <p>profile works!</p>
 <button (click)="logout()">Log out</button>
+<ul>
+  <li *ngFor="let user of users">
+    <h6>User: {{user.name}}
+      {{user.surname}}</h6>
+    <h6>Age: {{user.age}}</h6>
+  </li>
+</ul>
