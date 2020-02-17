@@ -6,7 +6,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {NewAccountComponent} from './new-account/new-account.component';
 import {LoginComponent} from './login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AlertService} from '../shared/alert-service.service';
 
@@ -18,6 +18,6 @@ import {AlertService} from '../shared/alert-service.service';
     UsersRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [AngularFirestoreModule, AngularFireAuth, AlertService]
+  providers: []
 })
 export class UsersModule { }
