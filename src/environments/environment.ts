@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   firebase: {
     // TODO Key will be securely hidden
-    apiKey: 'I-WILL-FIX-IT-SOON',
+    apiKey: 'x',
     authDomain: 'chattijanchat.firebaseapp.com',
     databaseURL: 'https://chattijanchat.firebaseio.com',
     projectId: 'chattijanchat',
