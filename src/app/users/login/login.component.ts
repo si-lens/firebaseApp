@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import {Router} from '@angular/router';
-import {AlertService} from '../shared/alert-service.service';
+import {AlertService} from '../../shared/alert-service.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

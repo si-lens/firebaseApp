@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CustomValidators} from '../shared/custom-validators';
+import {CustomValidators} from '../../shared/custom-validators';
 import {Router} from '@angular/router';
-import {NgbAlert} from '@ng-bootstrap/ng-bootstrap';
-import {Subject} from 'rxjs';
-import {debounceTime} from 'rxjs/operators';
-import {AlertService} from '../shared/alert-service.service';
+import {AlertService} from '../../shared/alert-service.service';
 
 @Component({
   selector: 'app-new-account',
