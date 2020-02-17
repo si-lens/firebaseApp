@@ -14,7 +14,8 @@ import {User} from '../shared/user.model';
 })
 export class ProfileComponent implements OnDestroy, OnInit {
 
-  users: User[];
+  currentUser: User[];
+
   subscription: Subscription;
   constructor(private  afAuth: AngularFireAuth,
               private router: Router,
@@ -22,8 +23,8 @@ export class ProfileComponent implements OnDestroy, OnInit {
               private userService: UserService
   ) { }
   ngOnInit() {
-   this.subscription = this.userService.getUsers().subscribe( users => {
-      this.users = users;
+   this.subscription = this.userService.getUser().subscribe( user => {
+      this.currentUser = user;
     });
   }
   ngOnDestroy() {
@@ -41,5 +42,11 @@ export class ProfileComponent implements OnDestroy, OnInit {
         this.router.navigateByUrl('').catch(er => console.log(er.message));
       }
     });
+  }
+  edit() {
+
+  }
+  save() {
+
   }
 }

@@ -1,9 +1,29 @@
-<p>profile works!</p>
-<button (click)="logout()">Log out</button>
-<ul>
-  <li *ngFor="let user of users">
-    <h6>User: {{user.name}}
-      {{user.surname}}</h6>
-    <h6>Age: {{user.age}}</h6>
-  </li>
-</ul>
+
+<button style="position: absolute; right: 0; top: 0;" (click)="logout()">Log out</button>
+<div>Your profile informations:
+  <ul>
+    <li *ngFor="let user of currentUser">
+      <h6 *ngIf="user">ID: {{user.id}}</h6>
+    <h6 *ngIf="user">Name: {{user.name}}</h6>
+      <h6 *ngIf="user">Surname: {{user.surname}}</h6>
+    <h6 *ngIf="user">Age: {{user.age}}</h6>
+    <button>Edit</button>
+    </li>
+  </ul>
+</div>
+
+<h1 style=" width: fit-content"> Profile informations: </h1>
+<div class="form">
+  <div class="form-group" >
+    <label for="email">Email address:</label>
+    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" >
+  </div>
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input type="password" class="form-control" id="password" [placeholder]="">
+  </div>
+  <div style="text-align: center">
+    <!--<button  class="btn btn-primary centerItem" id="saveButton" (click)="save()"> Save</button> -->
+    <button  class="btn btn-primary centerItem" id="editButton" (click)="edit()"> Save</button>
+       </div>
+</div>

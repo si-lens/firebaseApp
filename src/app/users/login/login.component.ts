@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import {Router} from '@angular/router';
 import {AlertService} from '../../shared/alert-service.service';
+import {UserService} from '../shared/user.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,7 +11,11 @@ import {AlertService} from '../../shared/alert-service.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public afAuth: AngularFireAuth, private router: Router, private alertService: AlertService) {
+  constructor(public afAuth: AngularFireAuth,
+              private router: Router,
+              private alertService: AlertService,
+              private userService: UserService
+  ) {
   }
   loading: boolean;
   ngOnInit() {
@@ -35,7 +40,7 @@ export class LoginComponent implements OnInit {
 
     this.afAuth.auth.onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
-        console.log(firebaseUser);
+        this.userService.setID(this.afAuth.auth.currentUser.uid);
         this.router.navigateByUrl('profile');
       } else {
         console.log('not logged in');
