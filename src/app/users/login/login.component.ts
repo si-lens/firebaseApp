@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
 
     this.afAuth.auth.onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
-        this.userService.setID(this.afAuth.auth.currentUser.uid);
+        this.userService.setUser(this.afAuth.auth.currentUser.email);
         this.router.navigateByUrl('profile');
       } else {
         console.log('not logged in');

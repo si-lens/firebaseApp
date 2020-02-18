@@ -1,29 +1,34 @@
 
 <button style="position: absolute; right: 0; top: 0;" (click)="logout()">Log out</button>
-<div>Your profile informations:
+
+<div *ngIf="!editMode">
   <ul>
-    <li *ngFor="let user of currentUser">
-      <h6 *ngIf="user">ID: {{user.id}}</h6>
-    <h6 *ngIf="user">Name: {{user.name}}</h6>
-      <h6 *ngIf="user">Surname: {{user.surname}}</h6>
-    <h6 *ngIf="user">Age: {{user.age}}</h6>
-    <button>Edit</button>
-    </li>
+    <h6>Your profile informations:</h6>
+      <h6 *ngIf="currentUser">ID - {{this.currentUser[0].id}}</h6>
+    <h6 *ngIf="currentUser">Name - {{this.currentUser[0].name}}</h6>
+      <h6 *ngIf="currentUser">Surname - {{this.currentUser[0].surname}}</h6>
+    <h6 *ngIf="currentUser">Age - {{this.currentUser[0].age}}</h6>
+    <button  class="btn btn-success centerItem" id="editButton" (click)="edit()">Edit</button>
   </ul>
 </div>
 
+<div *ngIf="editMode">
 <h1 style=" width: fit-content"> Profile informations: </h1>
-<div class="form">
+<div class="form" [formGroup]="userForm">
   <div class="form-group" >
-    <label for="email">Email address:</label>
-    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" >
+    <label for="name">Name:</label>
+    <input type="text" class="form-control" id="name" aria-describedby="emailHelp" formControlName="name" required minlength="2" >
   </div>
   <div class="form-group">
-    <label for="password">Password:</label>
-    <input type="password" class="form-control" id="password" [placeholder]="">
+    <label for="surname">Surname:</label>
+    <input type="text" class="form-control" id="surname" formControlName="surname" required minlength="2">
+  </div>
+  <div class="form-group">
+    <label for="age">Age:</label>
+    <input type="number" class="form-control" id="age" formControlName="age" required minlength="1" max="110" maxlength="3" onKeyUp="if(this.value>99){this.value='110';}else if(this.value<0){this.value='0';}" >
   </div>
   <div style="text-align: center">
-    <!--<button  class="btn btn-primary centerItem" id="saveButton" (click)="save()"> Save</button> -->
-    <button  class="btn btn-primary centerItem" id="editButton" (click)="edit()"> Save</button>
+    <button *ngIf="userForm.valid"  class="btn btn-success centerItem" id="saveButton" (click)="save()"> Save</button><br><br><button class="btn btn-secondary centerItem" (click)="back()">Back</button>
        </div>
+</div>
 </div>
