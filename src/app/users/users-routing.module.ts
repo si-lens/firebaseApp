@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {NewAccountComponent} from './new-account/new-account.component';
 import {ProfileComponent} from './profile/profile.component';
+import {AdminComponent} from './admin/admin.component';
+import {AuthGuard} from '../shared/auth.guard';
 
 
 const routes: Routes = [
@@ -18,6 +20,10 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent
   },
+  {
+    path: 'admin', canActivate: [AuthGuard],
+    component: AdminComponent
+  }
 ];
 
 @NgModule({

@@ -9,6 +9,7 @@ import {User} from '../shared/user.model';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Task} from "protractor/built/taskScheduler";
 import * as firebase from "firebase";
+import {AuthenticationService} from "../../shared/authentication.service";
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -28,13 +29,15 @@ export class ProfileComponent implements OnDestroy, OnInit {
   constructor(private  afAuth: AngularFireAuth,
               private router: Router,
               private alertService: AlertService,
-              private userService: UserService
+              private userService: UserService,
+              private authService: AuthenticationService
   ) {
   }
 
   ngOnInit() {
     this.subscription = this.userService.getUser().subscribe(user => {
       this.currentUser = user[0];
+      this.authService.setCurrentUser(user[0]);
     });
   }
 
@@ -53,6 +56,7 @@ export class ProfileComponent implements OnDestroy, OnInit {
         this.router.navigateByUrl('').catch(er => console.log(er.message));
       }
     });
+    this.ngOnDestroy();
   }
 
   edit() {

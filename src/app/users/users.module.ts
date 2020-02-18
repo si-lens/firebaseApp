@@ -6,10 +6,11 @@ import {ProfileComponent} from './profile/profile.component';
 import {NewAccountComponent} from './new-account/new-account.component';
 import {LoginComponent} from './login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
-  declarations: [ProfileComponent, NewAccountComponent, LoginComponent],
+  declarations: [ProfileComponent, NewAccountComponent, LoginComponent, AdminComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
