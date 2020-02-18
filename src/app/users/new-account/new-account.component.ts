@@ -5,6 +5,7 @@ import {CustomValidators} from '../../shared/custom-validators';
 import {Router} from '@angular/router';
 import {AlertService} from '../../shared/alert-service.service';
 import {UserService} from '../shared/user.service';
+import {AuthenticationService} from "../../shared/authentication.service";
 
 @Component({
   selector: 'app-new-account',
@@ -17,7 +18,8 @@ export class NewAccountComponent implements OnInit {
               private fb: FormBuilder,
               private router: Router,
               private alertService: AlertService,
-              private userService: UserService) {
+              private userService: UserService
+              ) {
     this.signUpForm = this.createSignupForm();
   }
   public signUpForm: FormGroup;
@@ -32,7 +34,6 @@ export class NewAccountComponent implements OnInit {
     const db = this.afAuth.auth;
     this.afAuth.auth.createUserWithEmailAndPassword(email, password)
         .then(() => {
-            // tslint:disable-next-line:max-line-length
             const user = {id: db.currentUser.uid, email: db.currentUser.email, name: 'FILL THIS UP', surname: 'FILL THIS UP', age: 99, isAdmin: false};
             this.userService.update(user);
             this.router.navigateByUrl('');
