@@ -40,4 +40,5 @@ export class UserService {
   delete(u: User) {
     this.db.doc<User>(`users/${u.id}`).delete();
   }
+
 }

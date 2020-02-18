@@ -19,4 +19,9 @@ export class AdminComponent implements OnInit {
   delete(user: User) {
     this.userService.delete(user);
   }
+
+  setRole(user: User) {
+    user.isAdmin = true;
+    this.userService.update(user);
+  }
 }

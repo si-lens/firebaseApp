@@ -7,8 +7,6 @@ import {Observable, Subscription} from 'rxjs';
 import {UserService} from '../shared/user.service';
 import {User} from '../shared/user.model';
 import {FormControl, FormGroup} from '@angular/forms';
-import {Task} from "protractor/built/taskScheduler";
-import * as firebase from "firebase";
 import {AuthenticationService} from "../../shared/authentication.service";
 @Component({
   selector: 'app-profile',
