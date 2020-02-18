@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {Observable, of} from 'rxjs';
+import {from, Observable, of} from 'rxjs';
 import {User} from './user.model';
 import {map} from 'rxjs/operators';
 
@@ -9,7 +9,6 @@ import {map} from 'rxjs/operators';
 })
 export class UserService {
   currentUserID = '';
-  currentUser = '';
   constructor(private db: AngularFirestore) { }
   getUsers(): Observable<User[]> {
     return this.db.collection<User>('users').snapshotChanges().pipe(
@@ -20,9 +19,8 @@ export class UserService {
       }))
     );
   }
-
   getUser(): Observable<User[]> {
-    return this.db.collection<User>('users', ref => ref.where('email', '==', this.currentUser))
+    return this.db.collection<User>('users', ref => ref.where('id', '==', this.currentUserID))
       .snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as User;
@@ -33,10 +31,10 @@ export class UserService {
   }
 
   setUser(e: string) {
-    this.currentUser = e;
+    this.currentUserID = e;
   }
-
-  update(user: Partial<User>): Observable<any> {
-    return of(this.db.doc(`users/${user.id}`).set(user));
+  update(u: User) {
+   this.db.doc<User>(`users/${u.id}`)
+      .set(u);
   }
 }

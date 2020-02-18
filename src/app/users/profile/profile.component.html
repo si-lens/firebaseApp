@@ -4,10 +4,10 @@
 <div *ngIf="!editMode">
   <ul>
     <h6>Your profile informations:</h6>
-      <h6 *ngIf="currentUser">ID - {{this.currentUser[0].id}}</h6>
-    <h6 *ngIf="currentUser">Name - {{this.currentUser[0].name}}</h6>
-      <h6 *ngIf="currentUser">Surname - {{this.currentUser[0].surname}}</h6>
-    <h6 *ngIf="currentUser">Age - {{this.currentUser[0].age}}</h6>
+      <h6 *ngIf="currentUser">ID - {{this.currentUser.id}}</h6>
+    <h6 *ngIf="currentUser">Name - {{this.currentUser.name}}</h6>
+      <h6 *ngIf="currentUser">Surname - {{this.currentUser.surname}}</h6>
+    <h6 *ngIf="currentUser">Age - {{this.currentUser.age}}</h6>
     <button  class="btn btn-success centerItem" id="editButton" (click)="edit()">Edit</button>
   </ul>
 </div>
