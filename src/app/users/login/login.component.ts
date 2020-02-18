@@ -25,22 +25,22 @@ export class LoginComponent implements OnInit {
     const emailInput: HTMLInputElement = document.getElementById('email') as HTMLInputElement;
     const passwordInput: HTMLInputElement = document.getElementById('password') as HTMLInputElement;
     const logInButton: HTMLInputElement = document.getElementById('logInButton') as HTMLInputElement;
-
+    const db = this.afAuth.auth;
 
     logInButton.addEventListener('click', e => {
-      this.loading = true
+      this.loading = true;
       const email = emailInput.value;
       const password = passwordInput.value;
-      this.afAuth.auth.signInWithEmailAndPassword(email, password).
+      db.signInWithEmailAndPassword(email, password).
       catch(er => {
         this.alertService.errorMessageShow(er.message + ' Try again.');
         this.loading = false;
-      });
+      }, );
     });
 
     this.afAuth.auth.onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
-        this.userService.setUser(this.afAuth.auth.currentUser.email);
+        this.userService.setUser(db.currentUser.uid);
         this.router.navigateByUrl('profile');
       } else {
         console.log('not logged in');

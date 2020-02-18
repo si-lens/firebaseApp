@@ -7,6 +7,8 @@ import {Observable, Subscription} from 'rxjs';
 import {UserService} from '../shared/user.service';
 import {User} from '../shared/user.model';
 import {FormControl, FormGroup} from '@angular/forms';
+import {Task} from "protractor/built/taskScheduler";
+import * as firebase from "firebase";
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -14,7 +16,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 })
 export class ProfileComponent implements OnDestroy, OnInit {
 
-  currentUser: User[];
+  currentUser: User;
   userForm = new FormGroup({
     name: new FormControl(''),
     surname: new FormControl(''),
@@ -32,7 +34,7 @@ export class ProfileComponent implements OnDestroy, OnInit {
 
   ngOnInit() {
     this.subscription = this.userService.getUser().subscribe(user => {
-      this.currentUser = user;
+      this.currentUser = user[0];
     });
   }
 
@@ -45,7 +47,7 @@ export class ProfileComponent implements OnDestroy, OnInit {
       .catch(er => console.log(er.message));
     this.afAuth.auth.onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
-        console.log(firebaseUser);
+        // console.log(firebaseUser);
       } else {
         console.log('not logged in');
         this.router.navigateByUrl('').catch(er => console.log(er.message));
@@ -56,22 +58,28 @@ export class ProfileComponent implements OnDestroy, OnInit {
   edit() {
     this.editMode = true;
     this.userForm.patchValue({
-      name: this.currentUser[0].name,
-      surname: this.currentUser[0].surname,
-      age: this.currentUser[0].age
+      name: this.currentUser.name,
+      surname: this.currentUser.surname,
+      age: this.currentUser.age
     });
   }
 
   save() {
     const user = this.userForm.value;
-    this.currentUser[0].name = user.name;
-    this.currentUser[0].surname = user.surname;
-    this.currentUser[0].age = user.age;
-    this.userService.update(this.currentUser[0]);
+    this.currentUser.name = user.name;
+    this.currentUser.surname = user.surname;
+    this.currentUser.age = user.age;
+    this.userService.update(this.currentUser);
     this.editMode = false;
   }
+
   back() {
     this.editMode = false;
+  }
+
+  sendCode() {
+    this.afAuth.auth.sendPasswordResetEmail(this.currentUser.email);
+    this.alertService.successMessageShow('Password change link was sent to your email account.');
   }
 }
 
