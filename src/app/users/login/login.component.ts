@@ -4,17 +4,19 @@ import { auth } from 'firebase/app';
 import {Router} from '@angular/router';
 import {AlertService} from '../../shared/alert-service.service';
 import {UserService} from '../shared/user.service';
+import {AuthenticationService} from "../../shared/authentication.service";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  db = this.afAuth.auth;
   constructor(public afAuth: AngularFireAuth,
               private router: Router,
               private alertService: AlertService,
-              private userService: UserService
+              private userService: UserService,
+              private authService: AuthenticationService
   ) {
   }
   loading: boolean;
@@ -22,16 +24,18 @@ export class LoginComponent implements OnInit {
     this.loading = false;
   }
   login() {
+    if (this.db.currentUser) {
+      this.db.signOut().then( msg => console.log('you were logged out'));
+    }
     const emailInput: HTMLInputElement = document.getElementById('email') as HTMLInputElement;
     const passwordInput: HTMLInputElement = document.getElementById('password') as HTMLInputElement;
     const logInButton: HTMLInputElement = document.getElementById('logInButton') as HTMLInputElement;
-    const db = this.afAuth.auth;
 
     logInButton.addEventListener('click', e => {
       this.loading = true;
       const email = emailInput.value;
       const password = passwordInput.value;
-      db.signInWithEmailAndPassword(email, password).
+      this.db.signInWithEmailAndPassword(email, password).
       catch(er => {
         this.alertService.errorMessageShow(er.message + ' Try again.');
         this.loading = false;
@@ -40,7 +44,7 @@ export class LoginComponent implements OnInit {
 
     this.afAuth.auth.onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
-        this.userService.setUser(db.currentUser.uid);
+        this.userService.setUser(this.db.currentUser.uid);
         this.router.navigateByUrl('profile');
       } else {
         console.log('not logged in');

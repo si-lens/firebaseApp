@@ -38,6 +38,7 @@ export class ProfileComponent implements OnDestroy, OnInit {
     this.subscription = this.userService.getUser().subscribe(user => {
       this.currentUser = user[0];
       this.authService.setCurrentUser(user[0]);
+      console.log(this.authService.getCurrentUserValue());
     });
   }
 
