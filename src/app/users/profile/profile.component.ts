@@ -7,6 +7,8 @@ import {Observable, Subscription} from 'rxjs';
 import {UserService} from '../shared/user.service';
 import {User} from '../shared/user.model';
 import {FormControl, FormGroup} from '@angular/forms';
+import {Task} from "protractor/built/taskScheduler";
+import * as firebase from "firebase";
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -70,8 +72,14 @@ export class ProfileComponent implements OnDestroy, OnInit {
     this.userService.update(this.currentUser);
     this.editMode = false;
   }
+
   back() {
     this.editMode = false;
+  }
+
+  sendCode() {
+    this.afAuth.auth.sendPasswordResetEmail(this.currentUser.email);
+    this.alertService.successMessageShow('Password change link was sent to your email account.');
   }
 }
 
