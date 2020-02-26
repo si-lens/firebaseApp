@@ -6,14 +6,13 @@ export const environment = {
   production: false,
   firebase: {
     // TODO Key will be securely hidden
-    apiKey: 'AIzaSyAFIN09WiEgQq6cTfpPanmAvrQi5sEYQwo',
-    authDomain: 'chattijanchat.firebaseapp.com',
-    databaseURL: 'https://chattijanchat.firebaseio.com',
-    projectId: 'chattijanchat',
-    storageBucket: 'chattijanchat.appspot.com',
-    messagingSenderId: '418145859824',
-    appId: '1:418145859824:web:267c3b0f7e30037089aa35',
-    measurementId: 'G-ZBH95YFWPY'
+    apiKey: 'AIzaSyAN4gETYnfblWEW5K3fmm47vY_duW4zx0A',
+    authDomain: 'authappfirebase-4e047.firebaseapp.com',
+    databaseURL: 'https://authappfirebase-4e047.firebaseio.com',
+    projectId: 'authappfirebase-4e047',
+    storageBucket: 'authappfirebase-4e047.appspot.com',
+    messagingSenderId: '408673278435',
+    appId: '1:408673278435:web:ad64851222616834a4e8d6'
   }
 };
 

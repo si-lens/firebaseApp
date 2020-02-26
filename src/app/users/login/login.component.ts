@@ -41,9 +41,10 @@ export class LoginComponent implements OnInit {
         this.loading = false;
       }, );
     });
-
+   // const x = this.afAuth.auth.
     this.afAuth.auth.onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
+        console.log(firebaseUser);
         this.userService.setUser(this.db.currentUser.uid);
         this.router.navigateByUrl('profile');
       } else {

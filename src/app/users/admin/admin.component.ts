@@ -24,4 +24,8 @@ export class AdminComponent implements OnInit {
     user.isAdmin = true;
     this.userService.update(user);
   }
+
+  block(user: User) {
+
+  }
 }
