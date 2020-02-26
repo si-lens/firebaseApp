@@ -1,6 +1,5 @@
 
 <button style="position: absolute; right: 0; top: 0;" (click)="logout()">Log out</button>
-<button style="position: absolute; right: 100px; top: 0;" (click)="sendCode()">Reset password</button>
 <div *ngIf="currentUser">
 <button style="position: absolute; right: 250px; top: 0;" routerLink="/admin" *ngIf="authService.getCurrentUserValue().isAdmin">Admin</button>
 </div>

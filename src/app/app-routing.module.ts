@@ -19,6 +19,10 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: './users/users.module#UsersModule'
+  },
+  {
+    path: 'reset',
+    loadChildren: './users/users.module#UsersModule'
   }
 ];
 

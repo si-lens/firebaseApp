@@ -45,16 +45,9 @@ export class ProfileComponent implements OnDestroy, OnInit {
   }
 
   logout() {
-    this.afAuth.auth.signOut().then(() => this.alertService.successMessageShow('You were logged out.'))
-      .catch(er => console.log(er.message));
-    this.afAuth.auth.onAuthStateChanged(firebaseUser => {
-      if (firebaseUser) {
-        // console.log(firebaseUser);
-      } else {
-        console.log('not logged in');
-        this.router.navigateByUrl('').catch(er => console.log(er.message));
-      }
-    });
+    this.authService.signOut().then(() => this.alertService.successMessageShow('You were logged out.'))
+      .catch(er => console.log(er.message))
+      .then(() => this.router.navigateByUrl(''));
     this.ngOnDestroy();
   }
 
@@ -80,9 +73,6 @@ export class ProfileComponent implements OnDestroy, OnInit {
     this.editMode = false;
   }
 
-  sendCode() {
-    this.afAuth.auth.sendPasswordResetEmail(this.currentUser.email);
-    this.alertService.successMessageShow('Password change link was sent to your email account.');
-  }
+
 }
 

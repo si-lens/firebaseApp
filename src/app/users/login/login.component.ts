@@ -4,7 +4,7 @@ import { auth } from 'firebase/app';
 import {Router} from '@angular/router';
 import {AlertService} from '../../shared/alert-service.service';
 import {UserService} from '../shared/user.service';
-import {AuthenticationService} from "../../shared/authentication.service";
+import {AuthenticationService} from '../../shared/authentication.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,6 +12,7 @@ import {AuthenticationService} from "../../shared/authentication.service";
 })
 export class LoginComponent implements OnInit {
   db = this.afAuth.auth;
+
   constructor(public afAuth: AngularFireAuth,
               private router: Router,
               private alertService: AlertService,
@@ -19,13 +20,16 @@ export class LoginComponent implements OnInit {
               private authService: AuthenticationService
   ) {
   }
+
   loading: boolean;
+
   ngOnInit() {
     this.loading = false;
   }
+
   login() {
     if (this.db.currentUser) {
-      this.db.signOut().then( msg => console.log('you were logged out'));
+      this.db.signOut().then(msg => console.log('you were logged out'));
     }
     const emailInput: HTMLInputElement = document.getElementById('email') as HTMLInputElement;
     const passwordInput: HTMLInputElement = document.getElementById('password') as HTMLInputElement;
@@ -35,13 +39,11 @@ export class LoginComponent implements OnInit {
       this.loading = true;
       const email = emailInput.value;
       const password = passwordInput.value;
-      this.db.signInWithEmailAndPassword(email, password).
-      catch(er => {
+      this.authService.signInWithEmailAndPassword(email, password).catch(er => {
         this.alertService.errorMessageShow(er.message + ' Try again.');
         this.loading = false;
-      }, );
+      });
     });
-   // const x = this.afAuth.auth.
     this.afAuth.auth.onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
         console.log(firebaseUser);
@@ -52,5 +54,4 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-
 }
