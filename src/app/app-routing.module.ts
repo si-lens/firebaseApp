@@ -23,6 +23,10 @@ const routes: Routes = [
   {
     path: 'reset',
     loadChildren: './users/users.module#UsersModule'
+  },
+  {
+    path: 'change',
+    loadChildren: './users/users.module#UsersModule'
   }
 ];
 

@@ -7,7 +7,7 @@ import {Observable, Subscription} from 'rxjs';
 import {UserService} from '../shared/user.service';
 import {User} from '../shared/user.model';
 import {FormControl, FormGroup} from '@angular/forms';
-import {AuthenticationService} from "../../shared/authentication.service";
+import {AuthenticationService} from '../../shared/authentication.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',

@@ -32,4 +32,7 @@ export class AuthenticationService {
   sendPasswordResetEmail(email: string) {
     return this.db.sendPasswordResetEmail(email);
   }
+  changePassword(password: string): Promise<any> {
+    return this.db.currentUser.updatePassword(password);
+  }
 }
