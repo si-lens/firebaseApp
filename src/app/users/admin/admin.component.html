@@ -3,6 +3,7 @@
     <h6>{{user.email}}</h6>
     <button *ngIf="!user.isAdmin" (click)="delete(user)">Delete User</button>
     <button *ngIf="!user.isAdmin" (click)="setRole(user)">Set admin</button>
+    <button *ngIf="!user.isAdmin" (click)="block(user)">Set admin</button>
     <h6 *ngIf="user.isAdmin"> That's an admin</h6>
     <br>
   </li>

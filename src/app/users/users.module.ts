@@ -7,10 +7,12 @@ import {NewAccountComponent} from './new-account/new-account.component';
 import {LoginComponent} from './login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { AdminComponent } from './admin/admin.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
-  declarations: [ProfileComponent, NewAccountComponent, LoginComponent, AdminComponent],
+  declarations: [ProfileComponent, NewAccountComponent, LoginComponent, AdminComponent, ResetPasswordComponent, ChangePasswordComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,

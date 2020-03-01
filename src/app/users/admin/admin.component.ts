@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../shared/user.service";
-import {User} from "../shared/user.model";
+import {UserService} from '../shared/user.service';
+import {User} from '../shared/user.model';
 
 @Component({
   selector: 'app-admin',
@@ -23,5 +23,9 @@ export class AdminComponent implements OnInit {
   setRole(user: User) {
     user.isAdmin = true;
     this.userService.update(user);
+  }
+
+  block(user: User) {
+
   }
 }
