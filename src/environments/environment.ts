@@ -5,14 +5,8 @@
 export const environment = {
   production: false,
   firebase: {
-    // TODO Key will be securely hidden
-    apiKey: 'AIzaSyAN4gETYnfblWEW5K3fmm47vY_duW4zx0A',
-    authDomain: 'authappfirebase-4e047.firebaseapp.com',
-    databaseURL: 'https://authappfirebase-4e047.firebaseio.com',
-    projectId: 'authappfirebase-4e047',
-    storageBucket: 'authappfirebase-4e047.appspot.com',
-    messagingSenderId: '408673278435',
-    appId: '1:408673278435:web:ad64851222616834a4e8d6'
+    // Don't worry it doesn't work ;)
+
   }
 };
 
