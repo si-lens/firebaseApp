@@ -1,1 +1,24 @@
-<p>product-create works!</p>
+<div class="form" [formGroup]="productForm" style="margin-top: 3%">
+  <h2 style="margin-bottom: 10px">Create new product</h2>
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" class="form-control" id="name" formControlName="name" maxlength="30" required>
+  </div>
+  <div class="form-group">
+    <label for="price">Price:</label>
+    <input type="number" class="form-control" id="price" formControlName="price" required minlength="1" max="99999" maxlength="5" onKeyUp="if(this.value>99999){this.value='99999';}else if(this.value<0){this.value='0';}" >
+  </div>
+  <div class="form-group">
+    <label>Available:</label>
+    <input type="radio" class="form-control" id="yes" formControlName="available" value="Yes" required>
+    <label for="yes">Yes</label>
+    <input type="radio" class="form-control" id="no" formControlName="available" value="No" required>
+    <label for="no">No</label>
+  </div>
+  <div style="text-align: center">
+    <button *ngIf="productForm.valid" class="btn btn-success centerItem" id="saveButton" (click)="save()">Save</button>
+    <br>
+    <br>
+    <button  class="btn btn-light centerItem" id="cancel" routerLink="profile">Cancel</button>
+  </div>
+</div>

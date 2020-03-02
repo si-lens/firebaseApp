@@ -1,33 +1,41 @@
-<div id="mainDiv">
-  <div class="btn-group" style="position: absolute; right: 0">
+
+  <div class="btn-group" style="position: absolute; right: 0; top: 0">
     <button routerLink="/admin" *ngIf="authService.getCurrentUserValue().isAdmin">Admin</button>
     <button routerLink="/change">Change Password</button>
     <button (click)="logout()">Log out</button>
   </div>
-<div *ngIf="currentUser">
-</div>
-<div *ngIf="loaded()"  style="margin-left: 10px">
-  <h2 style=" width: fit-content"> Profile informations: </h2>
-  <div class="form" [formGroup]="userForm">
-    <div class="form-group" >
-      <label for="name">Name:</label>
-      <input type="text" class="form-control" id="name" aria-describedby="emailHelp" formControlName="name">
-    </div>
-    <div class="form-group">
-      <label for="surname">Surname:</label>
-      <input type="text" class="form-control" id="surname" formControlName="surname" >
-    </div>
-    <div class="form-group">
-      <label for="age">Age:</label>
-      <input type="number" class="form-control" id="age" formControlName="age" >
-    </div>
-    <div style="text-align: center">
-      <button *ngIf="userForm.disabled" class="btn btn-success centerItem" id="editButton" (click)="userForm.enable()">Edit</button>
-      <button *ngIf="userForm.enabled" class="btn btn-success centerItem" id="saveButton" (click)="save()">Save</button>
-      <br>
-      <br>
-      <button *ngIf="userForm.enabled" class="btn btn-light centerItem" id="cancel" (click)="userForm.disable()">Cancel</button>
+
+
+  <div class="container" style="margin-top: 100px">
+    <div class="row">
+      <div class="col-sm">
+        <div *ngIf="loaded()">
+          <h2 style=" width: fit-content"> Profile informations: </h2>
+          <div class="form" [formGroup]="userForm">
+            <div class="form-group" >
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" id="name" aria-describedby="emailHelp" formControlName="name">
+            </div>
+            <div class="form-group">
+              <label for="surname">Surname:</label>
+              <input type="text" class="form-control" id="surname" formControlName="surname" >
+            </div>
+            <div class="form-group">
+              <label for="age">Age:</label>
+              <input type="number" class="form-control" id="age" formControlName="age" required minlength="1" max="110" maxlength="3" onKeyUp="if(this.value>99){this.value='110';}else if(this.value<0){this.value='0';}" >
+            </div>
+            <div style="text-align: center">
+              <button *ngIf="userForm.disabled" class="btn btn-success centerItem" id="editButton" (click)="userForm.enable()">Edit</button>
+              <button *ngIf="userForm.enabled" class="btn btn-success centerItem" id="saveButton" (click)="save()">Save</button>
+              <br>
+              <br>
+              <button *ngIf="userForm.enabled" class="btn btn-light centerItem" id="cancel" (click)="userForm.disable()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <app-product-list></app-product-list>
+      </div>
     </div>
   </div>
-</div>
-</div>
