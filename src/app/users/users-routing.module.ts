@@ -6,7 +6,9 @@ import {ProfileComponent} from './profile/profile.component';
 import {AdminComponent} from './admin/admin.component';
 import {AuthGuard} from '../shared/auth.guard';
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
-import {ChangePasswordComponent} from "./change-password/change-password.component";
+import {ChangePasswordComponent} from './change-password/change-password.component';
+import {ProductCreateComponent} from "../products/product-create/product-create.component";
+import {ProductUpdateComponent} from "../products/product-update/product-update.component";
 
 
 const routes: Routes = [
@@ -33,6 +35,13 @@ const routes: Routes = [
   {
     path: 'change',
     component: ChangePasswordComponent
+  },
+  { path: 'create-product',
+    component: ProductCreateComponent
+  },
+  {
+    path: 'update-product/:id',
+    component: ProductUpdateComponent
   }
 ];
 

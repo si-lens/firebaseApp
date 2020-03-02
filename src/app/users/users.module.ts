@@ -9,15 +9,25 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { AdminComponent } from './admin/admin.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import {ProductsModule} from '../products/products.module';
+import {ProductListComponent} from '../products/product-list/product-list.component';
 
 
 @NgModule({
-  declarations: [ProfileComponent, NewAccountComponent, LoginComponent, AdminComponent, ResetPasswordComponent, ChangePasswordComponent],
-  imports: [
-    CommonModule,
-    UsersRoutingModule,
-    ReactiveFormsModule
-  ],
+  declarations: [
+    ProfileComponent,
+    NewAccountComponent,
+    LoginComponent,
+    AdminComponent,
+    ResetPasswordComponent,
+    ChangePasswordComponent,
+    ProductListComponent],
+    imports: [
+        CommonModule,
+        UsersRoutingModule,
+        ReactiveFormsModule,
+        ProductsModule
+    ],
   providers: []
 })
 export class UsersModule { }

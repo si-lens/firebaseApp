@@ -22,7 +22,6 @@ export class ProfileComponent implements OnDestroy, OnInit {
     age: new FormControl('')
   });
   subscription: Subscription;
-  editMode = false;
 
   constructor(private  afAuth: AngularFireAuth,
               private router: Router,
@@ -36,6 +35,12 @@ export class ProfileComponent implements OnDestroy, OnInit {
     this.subscription = this.userService.getUser().subscribe(user => {
       this.currentUser = user[0];
       this.authService.setCurrentUser(user[0]);
+      this.userForm.patchValue({
+        name: this.currentUser.name,
+        surname: this.currentUser.surname,
+        age: this.currentUser.age
+      });
+      this.userForm.disable();
       console.log(this.authService.getCurrentUserValue());
     });
   }
@@ -50,29 +55,15 @@ export class ProfileComponent implements OnDestroy, OnInit {
       .then(() => this.router.navigateByUrl(''));
     this.ngOnDestroy();
   }
-
-  edit() {
-    this.editMode = true;
-    this.userForm.patchValue({
-      name: this.currentUser.name,
-      surname: this.currentUser.surname,
-      age: this.currentUser.age
-    });
-  }
-
   save() {
     const user = this.userForm.value;
     this.currentUser.name = user.name;
     this.currentUser.surname = user.surname;
     this.currentUser.age = user.age;
     this.userService.update(this.currentUser);
-    this.editMode = false;
   }
-
-  back() {
-    this.editMode = false;
+  loaded() {
+    return this.currentUser !== undefined;
   }
-
-
 }
 

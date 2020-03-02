@@ -27,7 +27,19 @@ const routes: Routes = [
   {
     path: 'change',
     loadChildren: './users/users.module#UsersModule'
-  }
+  },
+  {
+    path: 'products',
+    loadChildren: './products/products.module#ProductsModule'
+  },
+  {
+    path: 'create-product',
+    loadChildren: './products/products.module#ProductsModule'
+  },
+  {
+    path: 'update-product/:id',
+    loadChildren: './products/products.module#ProductsModule'
+  },
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 .form {
-  width: 25%;
+  width: 60%;
   padding: 10px;
   border: solid lightgray 2px;
   text-align: center;
@@ -37,3 +37,7 @@
 .btn-group button:hover {
   background-color: #3e8e41;
 }
+.grid-container {
+  display: grid;
+}
+
