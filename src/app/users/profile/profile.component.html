@@ -6,35 +6,28 @@
   </div>
 <div *ngIf="currentUser">
 </div>
-  <div *ngIf="!editMode">
-  <ul>
-    <h6>Your profile informations:</h6>
-      <h6 *ngIf="currentUser">ID - {{this.currentUser.id}}</h6>
-    <h6 *ngIf="currentUser">Name - {{this.currentUser.name}}</h6>
-      <h6 *ngIf="currentUser">Surname - {{this.currentUser.surname}}</h6>
-    <h6 *ngIf="currentUser">Age - {{this.currentUser.age}}</h6>
-    <button  class="btn btn-success centerItem" id="editButton" (click)="edit()">Edit</button>
-  </ul>
-</div>
-
-<div *ngIf="editMode">
-<h1 style=" width: fit-content"> Profile informations: </h1>
-<div class="form" [formGroup]="userForm">
-  <div class="form-group" >
-    <label for="name">Name:</label>
-    <input type="text" class="form-control" id="name" aria-describedby="emailHelp" formControlName="name" required minlength="2" >
+<div *ngIf="loaded()"  style="margin-left: 10px">
+  <h2 style=" width: fit-content"> Profile informations: </h2>
+  <div class="form" [formGroup]="userForm">
+    <div class="form-group" >
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" id="name" aria-describedby="emailHelp" formControlName="name">
+    </div>
+    <div class="form-group">
+      <label for="surname">Surname:</label>
+      <input type="text" class="form-control" id="surname" formControlName="surname" >
+    </div>
+    <div class="form-group">
+      <label for="age">Age:</label>
+      <input type="number" class="form-control" id="age" formControlName="age" >
+    </div>
+    <div style="text-align: center">
+      <button *ngIf="userForm.disabled" class="btn btn-success centerItem" id="editButton" (click)="userForm.enable()">Edit</button>
+      <button *ngIf="userForm.enabled" class="btn btn-success centerItem" id="saveButton" (click)="save()">Save</button>
+      <br>
+      <br>
+      <button *ngIf="userForm.enabled" class="btn btn-light centerItem" id="cancel" (click)="userForm.disable()">Cancel</button>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="surname">Surname:</label>
-    <input type="text" class="form-control" id="surname" formControlName="surname" required minlength="2">
-  </div>
-  <div class="form-group">
-    <label for="age">Age:</label>
-    <input type="number" class="form-control" id="age" formControlName="age" required minlength="1" max="110" maxlength="3" onKeyUp="if(this.value>99){this.value='110';}else if(this.value<0){this.value='0';}" >
-  </div>
-  <div style="text-align: center">
-    <button *ngIf="userForm.valid"  class="btn btn-success centerItem" id="saveButton" (click)="save()"> Save</button><br><br><button class="btn btn-secondary centerItem" (click)="back()">Back</button>
-       </div>
-</div>
 </div>
 </div>
