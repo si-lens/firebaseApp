@@ -3,13 +3,15 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {from, Observable, of} from 'rxjs';
 import {User} from './user.model';
 import {map} from 'rxjs/operators';
+import {FirebaseAuth} from '@angular/fire';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   currentUserID = '';
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore, private fireAuth: AngularFireAuth) { }
   getUsers(): Observable<User[]> {
     return this.db.collection<User>('users').snapshotChanges().pipe(
       map(actions => actions.map(a => {

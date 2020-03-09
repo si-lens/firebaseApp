@@ -34,7 +34,8 @@ export class NewAccountComponent implements OnInit {
     const db = this.afAuth.auth;
     this.afAuth.auth.createUserWithEmailAndPassword(email, password)
         .then(() => {
-            const user = {id: db.currentUser.uid, email: db.currentUser.email, name: 'FILL THIS UP', surname: 'FILL THIS UP', age: 99, isAdmin: false};
+            // tslint:disable-next-line:max-line-length
+            const user = {id: db.currentUser.uid, email: db.currentUser.email, name: 'FILL THIS UP', surname: 'FILL THIS UP', age: 99, isAdmin: false, isBlocked: false};
             this.userService.update(user);
             this.router.navigateByUrl('');
             this.alertService.successMessageShow('Account successfully created.');
