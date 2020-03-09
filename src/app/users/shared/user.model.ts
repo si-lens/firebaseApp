@@ -5,4 +5,5 @@ export interface User {
   surname: string;
   age: number;
   isAdmin?: boolean;
+  isBlocked?: boolean;
 }

@@ -25,7 +25,8 @@ export class AdminComponent implements OnInit {
     this.userService.update(user);
   }
 
-  block(user: User) {
-
+  blockOrUnblock(user: User, b: boolean) {
+  user.isBlocked = b;
+  this.userService.update(user);
   }
 }
