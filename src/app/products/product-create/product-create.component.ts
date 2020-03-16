@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {Product} from '../shared/product';
+import {Product} from '../../shared/models/product';
 import {ProductService} from '../shared/product.service';
 import {Router} from "@angular/router";
 import {AlertService} from "../../shared/alert-service.service";

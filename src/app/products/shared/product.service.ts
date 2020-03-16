@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
-import {User} from '../../users/shared/user.model';
+import {User} from '../../shared/models/user.model';
 import {map} from 'rxjs/operators';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {Product} from './product';
+import {Product} from '../../shared/models/product';
 
 @Injectable({
   providedIn: 'root'

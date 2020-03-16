@@ -133,3 +133,4 @@ fabric.properties
 # End of https://www.gitignore.io/api/angular,firebase,webstorm
 src/environments/environment.ts
 src/environments/environment.ts
+src/environments/environment.ts

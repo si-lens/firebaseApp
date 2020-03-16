@@ -5,7 +5,7 @@ import {AlertService} from '../../shared/alert-service.service';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable, Subscription} from 'rxjs';
 import {UserService} from '../shared/user.service';
-import {User} from '../shared/user.model';
+import {User} from '../../shared/models/user.model';
 import {FormControl, FormGroup} from '@angular/forms';
 import {AuthenticationService} from '../../shared/authentication.service';
 @Component({
