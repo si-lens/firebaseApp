@@ -5,14 +5,8 @@
 export const environment = {
   production: false,
   firebase: {
-    // Don't worry it doesn't work ;)
-    apiKey: 'AIzaSyBs-Olk1OSi8pA0h2FP6FVxLu1gGD37Yho',
-    authDomain: 'fullstackproject-428d2.firebaseapp.com',
-    databaseURL: 'https://fullstackproject-428d2.firebaseio.com',
-    projectId: 'fullstackproject-428d2',
-    storageBucket: 'fullstackproject-428d2.appspot.com',
-    messagingSenderId: '225302135911',
-    appId: '1:225302135911:web:20e5873b691a31933a40c2'
+    // Don't worry it doesn't work ;-)
+
   }
 };
 

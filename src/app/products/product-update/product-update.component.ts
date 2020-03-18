@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ProductService} from '../shared/product.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Product} from '../shared/product';
+import {Product} from '../../shared/models/product';
 import {AlertService} from '../../shared/alert-service.service';
 
 @Component({
