@@ -6,39 +6,39 @@ import {AuthGuard} from './shared/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: './users/users.module#UsersModule'
+    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
   },
   {
     path: 'newAccount',
-    loadChildren: './users/users.module#UsersModule'
+    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
   },
   {
     path: 'profile',
-    loadChildren: './users/users.module#UsersModule'
+    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
   },
   {
     path: 'admin',
-    loadChildren: './users/users.module#UsersModule'
+    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
   },
   {
     path: 'reset',
-    loadChildren: './users/users.module#UsersModule'
+    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
   },
   {
     path: 'change',
-    loadChildren: './users/users.module#UsersModule'
+    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
   },
   {
     path: 'products',
-    loadChildren: './products/products.module#ProductsModule'
+    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
   },
   {
     path: 'create-product',
-    loadChildren: './products/products.module#ProductsModule'
+    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
   },
   {
     path: 'update-product/:id',
-    loadChildren: './products/products.module#ProductsModule'
+    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
   },
 ];
 

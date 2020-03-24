@@ -5,7 +5,7 @@ import {AlertService} from '../../shared/alert-service.service';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable, Subscription} from 'rxjs';
 import {UserService} from '../shared/user.service';
-import {User} from '../../shared/models/user';
+import {User} from '../../shared/models/user.model';
 import {FormControl, FormGroup} from '@angular/forms';
 import {AuthenticationService} from '../../shared/authentication.service';
 @Component({
@@ -60,7 +60,7 @@ export class ProfileComponent implements OnDestroy, OnInit {
     this.currentUser.name = user.name;
     this.currentUser.surname = user.surname;
     this.currentUser.age = user.age;
-    this.userService.update(this.currentUser, false);
+    this.userService.update(this.currentUser);
   }
   loaded() {
     return this.currentUser !== undefined;
