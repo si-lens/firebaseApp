@@ -6,14 +6,7 @@ export const environment = {
   production: false,
   firebase: {
     // Don't worry it doesn't work ;-)
-    apiKey: 'AIzaSyAFIN09WiEgQq6cTfpPanmAvrQi5sEYQwo',
-    authDomain: 'chattijanchat.firebaseapp.com',
-    databaseURL: 'https://chattijanchat.firebaseio.com',
-    projectId: 'chattijanchat',
-    storageBucket: 'chattijanchat.appspot.com',
-    messagingSenderId: '418145859824',
-    appId: '1:418145859824:web:4a219dce5695db0589aa35',
-    measurementId: 'G-P81HHHZRYC'
+
   }
 };
 
