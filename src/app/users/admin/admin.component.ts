@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../shared/user.service';
-import {User} from '../../shared/models/user';
+import {User} from '../../shared/models/user.model';
 
 @Component({
   selector: 'app-admin',
@@ -9,27 +9,24 @@ import {User} from '../../shared/models/user';
 })
 export class AdminComponent implements OnInit {
   users: User[];
-  disabledUsers: User[];
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getUsers(false).subscribe( users => this.users = users);
-    this.userService.getUsers(true).subscribe(disabledUsers => this.disabledUsers = disabledUsers);
+    this.userService.getUsers().subscribe( users => this.users = users);
   }
 
 
   delete(user: User) {
-    this.userService.delete(user, user.isDisabled);
+    this.userService.delete(user);
   }
 
   setRole(user: User) {
     user.isAdmin = true;
-    this.userService.update(user, user.isDisabled);
+    this.userService.update(user);
   }
 
   blockOrUnblock(user: User, b: boolean) {
-  user.isDisabled = b;
-  this.userService.update(user, user.isDisabled)
-    .then(() => this.userService.transferUser(user));
+  user.isBlocked = b;
+  this.userService.update(user);
   }
 }

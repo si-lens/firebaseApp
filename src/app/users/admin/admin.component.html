@@ -1,21 +1,11 @@
 <ul>
-  <h1>Users list</h1>
   <li *ngFor="let user of users">
     <h6>{{user.email}}</h6>
     <button *ngIf="!user.isAdmin" (click)="delete(user)">Delete User</button>
-    <button *ngIf="!user.isAdmin && !user.isDisabled" (click)="blockOrUnblock(user,true)">Block user</button>
-    <button *ngIf="!user.isAdmin && user.isDisabled" (click)="blockOrUnblock(user,false)">Unblock user</button>
+    <button *ngIf="!user.isAdmin && !user.isBlocked" (click)="blockOrUnblock(user,true)">Block user</button>
+    <button *ngIf="!user.isAdmin && user.isBlocked" (click)="blockOrUnblock(user,false)">Unblock user</button>
     <button *ngIf="!user.isAdmin" (click)="setRole(user)">Set admin</button>
     <h6 *ngIf="user.isAdmin"> That's an admin</h6>
-    <br>
-  </li>
-</ul>
-<ul>
-  <h1>Disabled users list</h1>
-  <li *ngFor="let user of disabledUsers">
-    <h6>{{user.email}}</h6>
-    <button *ngIf="!user.isAdmin" (click)="delete(user)">Delete User</button>
-    <button *ngIf="!user.isAdmin && user.isDisabled" (click)="blockOrUnblock(user,false)">Unblock user</button>
     <br>
   </li>
 </ul>
