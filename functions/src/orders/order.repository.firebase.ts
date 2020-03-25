@@ -1,8 +1,8 @@
 
 import * as admin from 'firebase-admin';
-import {ProductRepository} from './product.repository';
+import {OrderRepository} from './order.repository';
 
-export class ProductRepositoryFirebase implements ProductRepository {
+export class OrderRepositoryFirebase implements OrderRepository {
   topProductsPath = 'top-products';
 
 

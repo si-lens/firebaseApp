@@ -19,11 +19,18 @@ exports.productWritten = functions.firestore
 */
 exports.productCreated = functions.firestore.document('products/{id}')
   .onCreate((snapshot, context) => {
-    const product = snapshot.data() as Product
+    const product =  snapshot.data() as Product
    //snapshot.id  - Can somebody explain me why this doesn't work?!
-   depFactory.getProductController().productCreated(product.id).then(() => console.log(snapshot.id)).catch(()=>console.log("You suck"));
+   depFactory.getStockController().stockProductCreate(product).then(() => console.log("Success")).catch(()=>console.log("You suck"));
   });
 
+exports.productBought = functions.firestore.document('products/id')
+  .onUpdate((change, context) => {
+        //When product is bought, stock amount is decresed
+       depFactory.getStockController().decreaseStockCount(change,context).then(() => console.log("Success")).catch(()=>console.log("You suck"));
+       //Add it to order collection
+      //depFactory.getOrderController().createOrder(change,context).then(() => console.log("Success")).catch(()=>console.log("You suck"));
+  });
 
 
 

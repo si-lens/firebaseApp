@@ -1,5 +1,4 @@
-export interface ProductController {
-  productCreated(productID: string): Promise<any>;
 
-  productWritten(productID: string): Promise<any>;
+export interface ProductController {
+  doSth(s: string):any;
 }
