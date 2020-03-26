@@ -1,5 +1,6 @@
+import {Product} from "../models/products";
 
 
 export interface ProductRepository {
-  doSth(x: string): void;
+  updateProduct(product: Product): Promise<any>;
 }

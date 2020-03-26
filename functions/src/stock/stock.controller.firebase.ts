@@ -16,7 +16,12 @@ export class StockControllerFirebase implements StockController{
     const productBefore = change.before.data() as Product;
     const productAfter = change.after.data() as Product;
     const difference = productAfter.timesPurchased - productBefore.timesPurchased;
-    return this.stockService.decreaseStockCount(difference,context.params.id);
+    //difference means how many times the product was bought
+    if(difference>0) {
+      return this.stockService.decreaseStockCount(difference, context.params.id);
+    } else {
+      return Promise.resolve();
+    }
   }
 
 }

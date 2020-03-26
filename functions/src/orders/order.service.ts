@@ -1,9 +1,9 @@
 import {OrderRepository} from "./order.repository";
+import {Product} from "../models/products";
 
 export class OrderService {
   constructor(private productRepository: OrderRepository) {}
-
-  doSth(s1: string) {
-    this.productRepository.doSth('x');
+  createOrder(product: Product, timesPurchased: number) {
+    return this.productRepository.createOrder(product,timesPurchased);
   }
 }

@@ -21,17 +21,21 @@ exports.productCreated = functions.firestore.document('products/{id}')
   .onCreate((snapshot, context) => {
     const product =  snapshot.data() as Product
    //snapshot.id  - Can somebody explain me why this doesn't work?!
-   depFactory.getStockController().stockProductCreate(product).then(() => console.log("Success")).catch(()=>console.log("You suck"));
+   depFactory.getStockController().stockProductCreate(product).then(() => console.log("Success")).catch(()=>console.log("Something went wrong"));
   });
-
-exports.productBought = functions.firestore.document('products/id')
+exports.productBought = functions.firestore.document('products/{id}')
   .onUpdate((change, context) => {
-        //When product is bought, stock amount is decresed
-       depFactory.getStockController().decreaseStockCount(change,context).then(() => console.log("Success")).catch(()=>console.log("You suck"));
-       //Add it to order collection
-      //depFactory.getOrderController().createOrder(change,context).then(() => console.log("Success")).catch(()=>console.log("You suck"));
+        //When product is bought, stock amount is decreased
+       depFactory.getStockController().decreaseStockCount(change,context).then(() => console.log("Success")).catch(()=>console.log("Something went wrong"));
+       ///When product is bought, new order is created and added to the db
+       depFactory.getOrderController().createOrder(change,context).then(() => console.log("Success")).catch(()=>console.log("Something went wrong"));
   });
-
+exports.productUpdated = functions.firestore.document('products/{id}')
+  .onUpdate((change, context) => {
+    //Todo implement methods for updating product both in "orders" and "stocks" collections
+    //depFactory.getOrderController().updateProductInOrder(change,context).then(() => console.log("Success")).catch(()=>console.log("Something went wrong"));
+    //depFactory.getStockController().updateProductInOrder(change,context).then(() => console.log("Success")).catch(()=>console.log("Something went wrong"));
+  });
 
 
 

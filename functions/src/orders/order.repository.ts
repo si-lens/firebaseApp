@@ -1,5 +1,7 @@
+import {Product} from "../models/products";
 
 
 export interface OrderRepository {
-  doSth(x: string): void;
+  createOrder(product: Product, timesPurchased: number): Promise<any>;
+
 }

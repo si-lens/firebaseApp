@@ -8,7 +8,7 @@ export class StockService {
     return this.stockRepo.stockProductCreate(product);
   }
 
-  decreaseStockCount(difference: number, productID: any):Promise<any> {
+  decreaseStockCount(difference: number, productID: string):Promise<any> {
     return this.stockRepo.decreaseStockCount(difference,productID);
   }
 }

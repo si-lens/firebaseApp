@@ -1,6 +1,7 @@
 
 import * as admin from 'firebase-admin';
 import {ProductRepository} from './product.repository';
+import {Product} from "../models/products";
 
 export class ProductRepositoryFirebase implements ProductRepository {
   topProductsPath = 'top-products';
@@ -10,8 +11,8 @@ export class ProductRepositoryFirebase implements ProductRepository {
     return admin.firestore();
   }
 
-  doSth(x: string): any {
-    return null;
+  updateProduct(product: Product): Promise<any> {
+    return this.db().doc(`products/${product.id}`).update(product);
   }
 
 

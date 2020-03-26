@@ -1,6 +1,6 @@
 import {Product} from "./products";
 
-export interface Orderline {
+export interface Order_line {
   productBought: Product;
   count: number;
 }

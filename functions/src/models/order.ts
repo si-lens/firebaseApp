@@ -1,5 +1,5 @@
-import {Orderline} from "./orderline";
+import {Order_line} from "./order_line";
 
 export interface Order {
-  orderlines: Orderline[];
+  order_lines: Order_line[];
 }

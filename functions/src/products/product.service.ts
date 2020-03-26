@@ -1,9 +1,10 @@
 import {ProductRepository} from "./product.repository";
+import {Product} from "../models/products";
 
 export class ProductService {
   constructor(private productRepository: ProductRepository) {}
 
-  doSth(s1: string) {
-    this.productRepository.doSth('x');
+  updateProduct(product: Product): Promise<any> {
+    return this.productRepository.updateProduct(product);
   }
 }

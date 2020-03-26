@@ -2,6 +2,7 @@ import {StockRepository} from "./stock.repository";
 import * as admin from 'firebase-admin';
 import {Product} from "../models/products";
 import {Stock} from "../models/stock";
+
 export class StockRepositoryFirebase implements StockRepository{
   stockProductCreate(product:Product): Promise<any> {
    return this.db().collection('stock').add({
@@ -13,23 +14,29 @@ export class StockRepositoryFirebase implements StockRepository{
     return admin.firestore();
   }
 
-  decreaseStockCount(difference: number, productID: any): Promise<any> {
-    const citiesRef = this.db().collection("stock");
-    let query = citiesRef.where("count", "==", 5);
+  decreaseStockCount(difference: number, productID: string): Promise<any> {
+    const stockCollection = this.db().collection("stock");
 
-    return query.get()
+      return stockCollection.get()
       .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
           // doc.data() is never undefined for query doc snapshots
           let stock = doc.data() as Stock;
-          console.log("count: "+ stock.count);
-          console.log("id: "+ stock.product.id);
+          // If stock's product.id is the same as id of currently bought product, stock will be updated
+          if(stock.product.id === productID) {
+            stock.count -= difference;
+            stock.product.timesPurchased += difference
+            return stockCollection.doc(`${doc.id}`).update(stock)
+              .catch(() => console.log("\"decreaseStockCount: \"Stock updated"))
+              .then(() => console.log("\"decreaseStockCount: \"Stock update failed"));
+          } else {
+            return Promise.resolve();
+          }
         });
       })
       .catch(function(error) {
-        console.log("Error getting documents: ", error);
+        console.log("\"decreaseStockCount: \" Error getting documents: ", error);
       });
-
 
   }
 }
