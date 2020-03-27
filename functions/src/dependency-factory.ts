@@ -1,8 +1,3 @@
-import {ProductController} from './products/product.controller';
-import {ProductControllerFirebase} from './products/product.controller.firebase';
-import {ProductRepositoryFirebase} from './products/product.repository.firebase';
-import {ProductRepository} from './products/product.repository';
-import {ProductService} from './products/product.service';
 import {StockController} from "./stock/stock.controller";
 import {StockRepository} from "./stock/stock.repository";
 import {StockService} from "./stock/stock.service";
@@ -14,11 +9,12 @@ import {OrderService} from "./orders/order.service";
 import {OrderRepositoryFirebase} from "./orders/order.repository.firebase";
 
 export class DependencyFactory {
+  /*
   getProductController(): ProductController {
     const repo: ProductRepository = new ProductRepositoryFirebase();
     const service: ProductService = new ProductService(repo);
     return new ProductControllerFirebase(service)
-  }
+  }*/
   getStockController(): StockController {
     const repo: StockRepository = new StockRepositoryFirebase();
     const service: StockService = new StockService(repo);

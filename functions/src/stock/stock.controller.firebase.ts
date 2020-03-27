@@ -12,15 +12,17 @@ export class StockControllerFirebase implements StockController{
    return this.stockService.stockProductCreate(product);
   }
 
-  decreaseStockCount(change: Change<DocumentSnapshot>, context: EventContext): Promise<any> {
+  handleStock(change: Change<DocumentSnapshot>, context: EventContext): Promise<any> {
     const productBefore = change.before.data() as Product;
     const productAfter = change.after.data() as Product;
     const difference = productAfter.timesPurchased - productBefore.timesPurchased;
     //difference means how many times the product was bought
     if(difference>0) {
+      //When product is bought, stock amount is decreased
       return this.stockService.decreaseStockCount(difference, context.params.id);
     } else {
-      return Promise.resolve();
+      //When product is edited, it's edited in the stock as well
+      return this.stockService.updateProductInStock(productAfter);
     }
   }
 

@@ -11,4 +11,8 @@ export class StockService {
   decreaseStockCount(difference: number, productID: string):Promise<any> {
     return this.stockRepo.decreaseStockCount(difference,productID);
   }
+
+  updateProductInStock(product: Product) {
+    return this.stockRepo.updateProductInStock(product);
+  }
 }

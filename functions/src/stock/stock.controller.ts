@@ -6,5 +6,5 @@ import {EventContext} from 'firebase-functions';
 export interface StockController {
   stockProductCreate(product: Product): Promise<any>;
 
-  decreaseStockCount(change: Change<DocumentSnapshot>, context: EventContext): Promise<any>;
+  handleStock(change: Change<DocumentSnapshot>, context: EventContext): Promise<any>;
 }

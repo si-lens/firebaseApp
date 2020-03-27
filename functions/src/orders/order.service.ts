@@ -6,4 +6,8 @@ export class OrderService {
   createOrder(product: Product, timesPurchased: number) {
     return this.productRepository.createOrder(product,timesPurchased);
   }
+
+  updateProductInOrder(productAfter: Product) {
+    return this.productRepository.updateProductInOrder(productAfter);
+  }
 }

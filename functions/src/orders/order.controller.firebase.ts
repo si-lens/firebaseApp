@@ -8,14 +8,16 @@ import {Product} from "../models/products";
 export class OrderControllerFirebase implements OrderController {
   constructor(private orderService: OrderService) {
   }
-  createOrder(change: Change<DocumentSnapshot>, context: EventContext): Promise<any> {
+  handleOrder(change: Change<DocumentSnapshot>, context: EventContext): Promise<any> {
     const productAfter = change.after.data() as Product;
     const productBefore = change.before.data() as Product;
     const timesPurchased = productAfter.timesPurchased - productBefore.timesPurchased;
-    if(timesPurchased > 0) {
+    if(timesPurchased>0) {
+      //When product is bought, new order is created and added to the db
       return this.orderService.createOrder(productAfter, timesPurchased);
     } else {
-      return Promise.resolve();
+      // When product is edited, it will be updated in the order as well
+      return this.orderService.updateProductInOrder(productAfter);
     }
   }
 }
