@@ -18,10 +18,10 @@ export class StockControllerFirebase implements StockController{
     const difference = productAfter.timesPurchased - productBefore.timesPurchased;
     //difference means how many times the product was bought
     if(difference>0) {
-      //When product is bought, stock amount is decreased
-      return this.stockService.decreaseStockCount(difference, context.params.id);
+      //When product is bought, stocks amount is decreased
+      return this.stockService.decreaseStockCount(difference, productAfter);
     } else {
-      //When product is edited, it's edited in the stock as well
+      //When product is edited, it's edited in the stocks as well
       return this.stockService.updateProductInStock(productAfter);
     }
   }
