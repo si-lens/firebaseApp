@@ -15,7 +15,19 @@ export class StockControllerFirebase implements StockController{
   updateStock(change: Change<DocumentSnapshot>, context: EventContext): Promise<any> {
     const productBefore = change.before.data() as Product;
     const productAfter = change.after.data() as Product;
-    return this.stockService.updateStock(productBefore,productAfter);
+      //difference means how many times the product was bought
+      const difference = productAfter.timesPurchased - productBefore.timesPurchased;
+      if (difference > 0) {
+        //When product is bought, stocks amount is decreased
+        return this.stockService.decreaseStockCount(difference, productAfter);
+      } else {
+        //When product is edited, it's edited in the stocks as well
+        return this.stockService.updateProductInStock(productAfter);
+      }
+  }
+
+  deleteStock(context: EventContext): Promise<any> {
+   return this.stockService.deleteStock(context.params.id);
   }
 
 }

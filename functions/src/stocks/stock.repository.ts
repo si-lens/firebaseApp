@@ -6,4 +6,6 @@ export interface StockRepository {
   decreaseStockCount(difference: number, product: Product): Promise<any>;
 
   updateProductInStock(product: Product): Promise<any>;
+
+  deleteStock(id: string): Promise<any>;
 }

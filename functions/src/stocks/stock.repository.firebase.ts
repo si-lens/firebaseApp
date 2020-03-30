@@ -14,6 +14,7 @@ export class StockRepositoryFirebase implements StockRepository{
     return admin.firestore();
   }
 
+
   decreaseStockCount(difference: number, product: Product): Promise<any> {
     const stockCollection = this.db().collection("stocks");
 
@@ -21,7 +22,7 @@ export class StockRepositoryFirebase implements StockRepository{
       .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
           // doc.data() is never undefined for query doc snapshots
-          let stock = doc.data() as Stock;
+          const stock = doc.data() as Stock;
           // If stocks's product.id is the same as id of currently bought product, stocks will be updated
           if(stock.product.id === product.id) {
             stock.count -= difference;
@@ -41,6 +42,7 @@ export class StockRepositoryFirebase implements StockRepository{
   }
 
   updateProductInStock(product: Product): Promise<any> {
+
     const stockCollection = this.db().collection("stocks");
 
     return stockCollection.get()
@@ -54,6 +56,29 @@ export class StockRepositoryFirebase implements StockRepository{
             return stockCollection.doc(`${doc.id}`).update(stock)
               .catch(() => console.log("\"decreaseStockCount: \"Stock updated"))
               .then(() => console.log("\"decreaseStockCount: \"Stock update failed"));
+          } else {
+            return Promise.resolve();
+          }
+        });
+      })
+      .catch(function(error) {
+        console.log("\"decreaseStockCount: \" Error getting documents: ", error);
+      });
+  }
+
+  deleteStock(id: string): Promise<any> {
+
+    const stockCollection = this.db().collection("stocks");
+    return stockCollection.get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          const stock = doc.data() as Stock;
+          // If stocks's product.id is the same as id of currently updated product, stocks will be updated
+          if(stock.product.id === id) {
+             return stockCollection.doc(`${doc.id}`).delete()
+              .catch(() => console.log("\"decreaseStockCount: \"Stock update failed"))
+              .then(() => console.log("\"decreaseStockCount: \"Stock updated"));
           } else {
             return Promise.resolve();
           }
