@@ -4,7 +4,7 @@ import {Product} from "../models/products";
 import {Stock} from "../models/stock";
 
 export class StockRepositoryFirebase implements StockRepository{
-  stockProductCreate(product:Product): Promise<any> {
+  stockCreate(product:Product): Promise<any> {
    return this.db().collection('stocks').add({
      count: 1000,
      product: product

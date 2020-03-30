@@ -4,15 +4,18 @@ import {Product} from "../models/products";
 export class StockService {
   constructor(private stockRepo: StockRepository) {
   }
-  stockProductCreate(product: Product): Promise<any>{
-    return this.stockRepo.stockProductCreate(product);
+  createStock(product: Product): Promise<any>{
+    return this.stockRepo.stockCreate(product);
   }
-
-  decreaseStockCount(difference: number, product: Product):Promise<any> {
-    return this.stockRepo.decreaseStockCount(difference,product);
-  }
-
-  updateProductInStock(product: Product) {
-    return this.stockRepo.updateProductInStock(product);
+  updateStock(productBefore: Product, productAfter: Product) {
+    const difference = productAfter.timesPurchased - productBefore.timesPurchased;
+    //difference means how many times the product was bought
+    if(difference>0) {
+      //When product is bought, stocks amount is decreased
+      return this.stockRepo.decreaseStockCount(difference, productAfter);
+    } else {
+      //When product is edited, it's edited in the stocks as well
+      return this.stockRepo.updateProductInStock(productAfter);
+    }
   }
 }

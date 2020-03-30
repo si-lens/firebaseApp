@@ -15,12 +15,12 @@ exports.productCreated = functions.firestore.document('products/{id}')
   .onCreate((snapshot, context) => {
     const product =  snapshot.data() as Product
    //snapshot.id  - Can somebody explain me why this doesn't work?!
-   depFactory.getStockController().stockProductCreate(product).then(() => console.log("Success")).catch(()=>console.log("Something went wrong"));
+   depFactory.getStockController().createStock(product).then(() => console.log("Success")).catch(()=>console.log("Something went wrong"));
   });
 exports.productUpdated = functions.firestore.document('products/{id}')
   .onUpdate((change, context) => {
-        depFactory.getOrderController().handleOrder(change,context).then(() => console.log("Success")).catch(()=>console.log("Something went wrong"));
-        depFactory.getStockController().handleStock(change,context).then(() => console.log("Success")).catch(()=>console.log("Something went wrong"));
+        depFactory.getOrderController().updateOrder(change,context).then(() => console.log("Success")).catch(()=>console.log("Something went wrong"));
+        depFactory.getStockController().updateStock(change,context).then(() => console.log("Success")).catch(()=>console.log("Something went wrong"));
   });
 
 

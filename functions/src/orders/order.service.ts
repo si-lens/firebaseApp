@@ -3,11 +3,15 @@ import {Product} from "../models/products";
 
 export class OrderService {
   constructor(private productRepository: OrderRepository) {}
-  createOrder(product: Product, timesPurchased: number) {
-    return this.productRepository.createOrder(product,timesPurchased);
-  }
 
-  updateProductInOrder(productAfter: Product) {
-    return this.productRepository.updateProductInOrder(productAfter);
+  updateOrder(productBefore: Product, productAfter: Product) {
+    const timesPurchased = productAfter.timesPurchased - productBefore.timesPurchased;
+    if(timesPurchased>0) {
+      //When product is bought, new order is created and added to the db
+      return this.productRepository.createOrder(productAfter, timesPurchased);
+    } else {
+      // When product is edited, it will be updated in the order as well
+      return this.productRepository.updateProductInOrder(productAfter);
+    }
   }
 }

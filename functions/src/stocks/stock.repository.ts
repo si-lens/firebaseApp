@@ -1,7 +1,7 @@
 import {Product} from "../models/products";
 
 export interface StockRepository {
-  stockProductCreate(product: Product):Promise<any>;
+  stockCreate(product: Product):Promise<any>;
 
   decreaseStockCount(difference: number, product: Product): Promise<any>;
 
