@@ -10,21 +10,18 @@ import {DependencyFactory} from "./dependency-factory";
 admin.initializeApp();
 
 const depFactory = new DependencyFactory();
-/*
-exports.productWritten = functions.firestore
-  .document('products/{productID}')
-  .onWrite((snap, context) => {
-    return depFactory.getProductController().productWritten(context.params.productID);
-  });
-*/
+
 exports.productCreated = functions.firestore.document('products/{id}')
   .onCreate((snapshot, context) => {
-    const product = snapshot.data() as Product
+    const product =  snapshot.data() as Product
    //snapshot.id  - Can somebody explain me why this doesn't work?!
-   depFactory.getProductController().productCreated(product.id).then(() => console.log(snapshot.id)).catch(()=>console.log("You suck"));
+   depFactory.getStockController().createStock(product).then(() => console.log("Success")).catch(()=>console.log("Something went wrong"));
   });
-
-
+exports.productUpdated = functions.firestore.document('products/{id}')
+  .onUpdate((change, context) => {
+        depFactory.getOrderController().updateOrder(change,context).then(() => console.log("Success")).catch(()=>console.log("Something went wrong"));
+        depFactory.getStockController().updateStock(change,context).then(() => console.log("Success")).catch(()=>console.log("Something went wrong"));
+  });
 
 
 
