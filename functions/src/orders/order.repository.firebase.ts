@@ -22,6 +22,7 @@ export class OrderRepositoryFirebase implements OrderRepository {
   }
 
   updateProductInOrder(product: Product): Promise<any> {
+
     const ordersCollection = this.db().collection("orders");
 
     return ordersCollection.get()

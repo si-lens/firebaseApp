@@ -13,7 +13,7 @@ const depFactory = new DependencyFactory();
 
 exports.productCreated = functions.firestore.document('products/{id}')
   .onCreate((snapshot, context) => {
-    const product =  snapshot.data() as Product
+    const product =  snapshot.data() as Product;
    //snapshot.id  - Can somebody explain me why this doesn't work?!
    depFactory.getStockController().createStock(product).then(() => console.log("Success")).catch(()=>console.log("Something went wrong"));
   });
@@ -22,7 +22,10 @@ exports.productUpdated = functions.firestore.document('products/{id}')
         depFactory.getOrderController().updateOrder(change,context).then(() => console.log("Success")).catch(()=>console.log("Something went wrong"));
         depFactory.getStockController().updateStock(change,context).then(() => console.log("Success")).catch(()=>console.log("Something went wrong"));
   });
-
+exports.productDeleted = functions.firestore.document('products/{id}')
+  .onDelete((snapshot, context) => {
+    depFactory.getStockController().deleteStock(context).then(() => console.log('deletion is working')).catch( error => console.log(error));
+  });
 
 
 // Methods for old project

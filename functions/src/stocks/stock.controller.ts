@@ -7,4 +7,6 @@ export interface StockController {
   createStock(product: Product): Promise<any>;
 
   updateStock(change: Change<DocumentSnapshot>, context: EventContext): Promise<any>;
+
+  deleteStock(context: EventContext):  Promise<any>;
 }

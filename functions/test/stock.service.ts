@@ -16,7 +16,7 @@ describe('StockService',() => {
     id: '123qwe',
     timesPurchased: 0
   };
-  const productAfter: Product = {
+  const productBought: Product = {
     url: 'a',
     name: 'b',
     price: 100,
@@ -24,14 +24,14 @@ describe('StockService',() => {
     timesPurchased: 1
   };
   const defaultStock : Stock = {count:1000, product:product};
-  const stockDecreased: Stock = {count:4, product:productAfter};
+  const stockDecreased: Stock = {count:4, product:productBought};
   beforeEach(() => {
     stockRepo = new Mock<StockRepository>()
       .setup(repo => repo.stockCreate(product))
       .returns(Promise.resolve(defaultStock))
       .setup(repo => repo.stockCreate(undefined as any))
       .returns(Promise.reject())
-      .setup(repo => repo.decreaseStockCount(1,productAfter))
+      .setup(repo => repo.decreaseStockCount(1,productBought))
       .returns(Promise.resolve(stockDecreased))
       .setup(repo => repo.updateProductInStock(product))
       .returns(Promise.resolve(product));
@@ -60,8 +60,12 @@ describe('StockService',() => {
     expect(stockAdded.product).toBe(product)
   });
   it('After product is bought its count in the Stock should decrease and timesPurchased increase',async () =>{
-    const stockAfter: Stock = await stockService.updateStock(product,productAfter);
+    const stockAfter: Stock = await stockService.decreaseStockCount(1, productBought);
       expect(stockAfter).toBe(stockDecreased);
+  });
+  it('Stock service should contain a method for deleting stock from collection and accept id as param',()=>{
+    const id = 'id';
+    stockService.deleteStock(id);
   });
 
 });
