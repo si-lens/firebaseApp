@@ -1,11 +1,11 @@
 import {Product} from "../models/products";
 
 export interface StockRepository {
-  stockCreate(product: Product):Promise<any>;
+  stockCreate(product: Product,id: string):Promise<any>;
 
-  decreaseStockCount(difference: number, product: Product): Promise<any>;
+  decreaseStockCount(difference: number, product: Product,id:string): Promise<any>;
 
-  updateProductInStock(product: Product): Promise<any>;
+  updateProductInStock(product: Product,id: string): Promise<any>;
 
   deleteStock(id: string): Promise<any>;
 }

@@ -11,6 +11,6 @@ export class OrderControllerFirebase implements OrderController {
   updateOrder(change: Change<DocumentSnapshot>, context: EventContext): Promise<any> {
     const productAfter = change.after.data() as Product;
     const productBefore = change.before.data() as Product;
-   return this.orderService.updateOrder(productBefore,productAfter);
+   return this.orderService.updateOrder(productBefore,productAfter,context.params.id);
   }
 }

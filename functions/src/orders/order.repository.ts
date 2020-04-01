@@ -2,7 +2,7 @@ import {Product} from "../models/products";
 
 
 export interface OrderRepository {
-  createOrder(product: Product, timesPurchased: number): Promise<any>;
+  createOrder(product: Product, timesPurchased: number,id: string): Promise<any>;
 
-  updateProductInOrder(product: Product): Promise<any>;
+  updateProductInOrders(product: Product,id:string): Promise<any>;
 }

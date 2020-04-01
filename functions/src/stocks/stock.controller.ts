@@ -4,7 +4,7 @@ import {DocumentSnapshot} from 'firebase-functions/lib/providers/firestore';
 import {EventContext} from 'firebase-functions';
 
 export interface StockController {
-  createStock(product: Product): Promise<any>;
+  createStock(product: Product, context: EventContext): Promise<any>;
 
   updateStock(change: Change<DocumentSnapshot>, context: EventContext): Promise<any>;
 

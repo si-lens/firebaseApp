@@ -11,9 +11,9 @@ export class OrderRepositoryFirebase implements OrderRepository {
     return admin.firestore();
   }
 
-  createOrder(product: Product, timesPurchased: number): Promise<any> {
+  createOrder(product: Product, timesPurchased: number,id: string): Promise<any> {
     const order_lines: Order_line[] = [];
-    const order_line: Order_line = {count: timesPurchased, productBought: product};
+    const order_line: Order_line = {productID:id, count: timesPurchased, productBought: product};
     order_lines.push(order_line);
 
     return this.db().collection('orders').add({
@@ -21,26 +21,25 @@ export class OrderRepositoryFirebase implements OrderRepository {
     });
   }
 
-  updateProductInOrder(product: Product): Promise<any> {
+  updateProductInOrders(product: Product,id:string): Promise<any> {
 
     const ordersCollection = this.db().collection("orders");
+    const batch = this.db().batch();
 
     return ordersCollection.get()
       .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
           // doc.data() is never undefined for query doc snapshots
           const order = doc.data() as Order;
-          if(order.order_lines[0].productBought.id === product.id) {
+          if(order.order_lines[0].productID === id) {
             order.order_lines[0].productBought = product;
             console.log("orderID: "+ doc.id);
-            return ordersCollection.doc(`${doc.id}`).set(order)
-              .catch(() => console.log("\"decreaseStockCount: \"Stock updated"))
-              .then(() => console.log("\"decreaseStockCount: \"Stock update failed"));
+            return batch.update(doc.ref,order);
           } else {
             return Promise.resolve();
           }
         });
-      })
+      }).then(()=> batch.commit())
       .catch(function(error) {
         console.log("\"decreaseStockCount: \" Error getting documents: ", error);
       });
