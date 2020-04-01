@@ -24,6 +24,7 @@ export class OrderRepositoryFirebase implements OrderRepository {
   updateProductInOrder(product: Product): Promise<any> {
 
     const ordersCollection = this.db().collection("orders");
+    const batch = this.db().batch();
 
     return ordersCollection.get()
       .then(function(querySnapshot) {
@@ -33,14 +34,12 @@ export class OrderRepositoryFirebase implements OrderRepository {
           if(order.order_lines[0].productBought.id === product.id) {
             order.order_lines[0].productBought = product;
             console.log("orderID: "+ doc.id);
-            return ordersCollection.doc(`${doc.id}`).set(order)
-              .catch(() => console.log("\"decreaseStockCount: \"Stock updated"))
-              .then(() => console.log("\"decreaseStockCount: \"Stock update failed"));
+            return batch.update(doc.ref,order);
           } else {
             return Promise.resolve();
           }
         });
-      })
+      }).then(()=> batch.commit())
       .catch(function(error) {
         console.log("\"decreaseStockCount: \" Error getting documents: ", error);
       });
