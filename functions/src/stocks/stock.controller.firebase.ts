@@ -8,8 +8,8 @@ import {EventContext} from 'firebase-functions';
 export class StockControllerFirebase implements StockController{
   constructor(private stockService: StockService) {
   }
-  createStock(product: Product): Promise<any> {
-   return this.stockService.createStock(product);
+  createStock(product: Product, context: EventContext): Promise<any> {
+   return this.stockService.createStock(product,context.params.id);
   }
 
   updateStock(change: Change<DocumentSnapshot>, context: EventContext): Promise<any> {
@@ -17,12 +17,13 @@ export class StockControllerFirebase implements StockController{
     const productAfter = change.after.data() as Product;
       //difference means how many times the product was bought
       const difference = productAfter.timesPurchased - productBefore.timesPurchased;
+      const id = context.params.id;
       if (difference > 0) {
         //When product is bought, stocks amount is decreased
-        return this.stockService.decreaseStockCount(difference, productAfter);
+        return this.stockService.decreaseStockCount(difference, productAfter,id);
       } else {
         //When product is edited, it's edited in the stocks as well
-        return this.stockService.updateProductInStock(productAfter);
+        return this.stockService.updateProductInStock(productAfter,id);
       }
   }
 
