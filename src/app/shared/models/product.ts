@@ -3,4 +3,5 @@ export interface Product {
   name: string;
   available: string;
   price: number;
+  timesPurchased?: number;
 }

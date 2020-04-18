@@ -5,7 +5,6 @@ import {CustomValidators} from '../../shared/custom-validators';
 import {Router} from '@angular/router';
 import {AlertService} from '../../shared/alert-service.service';
 import {UserService} from '../shared/user.service';
-import {AuthenticationService} from "../../shared/authentication.service";
 
 @Component({
   selector: 'app-new-account',

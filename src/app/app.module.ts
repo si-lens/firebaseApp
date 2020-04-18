@@ -7,9 +7,9 @@ import {environment} from '../environments/environment';
 import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {NgbAlert, NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {ReactiveFormsModule} from '@angular/forms';
 import {AlertService} from './shared/alert-service.service';
-
+import { NgxsModule } from '@ngxs/store';
+import {ProductState} from './products/shared/product.state';
 
 @NgModule({
   declarations: [
@@ -20,6 +20,9 @@ import {AlertService} from './shared/alert-service.service';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase, 'FirebaseApp'),
     NgbModule,
+    NgxsModule.forRoot([ProductState], {
+      developmentMode: !environment.production
+    })
   ],
   providers: [AngularFirestoreModule, AngularFireAuth, AlertService, AngularFirestore],
   bootstrap: [AppComponent]

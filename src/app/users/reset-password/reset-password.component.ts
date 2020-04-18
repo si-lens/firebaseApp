@@ -3,7 +3,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {AlertService} from '../../shared/alert-service.service';
 import {UserService} from '../shared/user.service';
-import {AuthenticationService} from '../../shared/authentication.service';
+import {AuthenticationService} from '../../shared/auth/authentication.service';
 
 @Component({
   selector: 'app-reset-password',

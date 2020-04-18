@@ -4,7 +4,7 @@ import {LoginComponent} from './login/login.component';
 import {NewAccountComponent} from './new-account/new-account.component';
 import {ProfileComponent} from './profile/profile.component';
 import {AdminComponent} from './admin/admin.component';
-import {AuthGuard} from '../shared/auth.guard';
+import {AuthGuard} from '../shared/auth/auth.guard';
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
 import {ChangePasswordComponent} from './change-password/change-password.component';
 import {ProductCreateComponent} from "../products/product-create/product-create.component";

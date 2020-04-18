@@ -2,12 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {AlertService} from '../../shared/alert-service.service';
-import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable, Subscription} from 'rxjs';
 import {UserService} from '../shared/user.service';
-import {User} from '../../shared/models/user.model';
+import {User} from '../../shared/models/user';
 import {FormControl, FormGroup} from '@angular/forms';
-import {AuthenticationService} from '../../shared/authentication.service';
+import {AuthenticationService} from '../../shared/auth/authentication.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -27,7 +26,7 @@ export class ProfileComponent implements OnDestroy, OnInit {
               private router: Router,
               private alertService: AlertService,
               private userService: UserService,
-              private authService: AuthenticationService
+              public authService: AuthenticationService
   ) {
   }
 
