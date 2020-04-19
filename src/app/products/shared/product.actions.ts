@@ -9,16 +9,16 @@ export class CreateProduct {
 export class UpdateProduct {
   static readonly type = '[Auth] UpdateProduct';
 
-  constructor() {}
+  constructor(public  p: Product, public id: string) {}
 }
 
 export class DeleteProduct {
   static readonly type = '[Auth] DeleteProduct';
 
-  constructor() {}
+  constructor(public id: string) {}
 }
 export class GetProducts {
-  static readonly type = '[Auth] GetProducts';
+  static readonly type = 'GetProducts';
 
   constructor() {}
 }

@@ -4,6 +4,8 @@ import {ProductService} from '../shared/product.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Product} from '../../shared/models/product';
 import {AlertService} from '../../shared/alert-service.service';
+import {Store} from "@ngxs/store";
+import {UpdateProduct} from "../shared/product.actions";
 
 @Component({
   selector: 'app-product-update',
@@ -21,7 +23,8 @@ export class ProductUpdateComponent implements OnInit {
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
               private alertService: AlertService,
-              private router: Router
+              private router: Router,
+              private store: Store
   ) { }
 
   ngOnInit() {
@@ -42,7 +45,7 @@ export class ProductUpdateComponent implements OnInit {
   this.product.price = formValues.price;
   this.product.available = formValues.available;
   this.product.name = formValues.name;
-  this.productService.update(this.product, this.id).then( () => {
+  this.store.dispatch(new UpdateProduct(this.product, this.id)).toPromise().then( () => {
     this.alertService.successMessageShow('Product was updated.');
     this.router.navigateByUrl('profile');
   });

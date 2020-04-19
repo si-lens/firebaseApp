@@ -23,12 +23,12 @@ export class ProductService {
   getProduct(ID: string): Observable<any> {
     return this.db.collection('products').doc(ID).valueChanges();
   }
-  create(product: Product): Observable<any> {
+  create(product: Product): Promise<any> {
     product.timesPurchased = 0;
-    return from(this.db.collection('products').add(product));
+    return this.db.collection('products').add(product);
   }
-  delete(id: string) {
-    this.db.doc<Product>(`products/${id}`).delete();
+  delete(id: string): Observable<any> {
+    return from(this.db.doc<Product>(`products/${id}`).delete());
   }
   update(p: Product, id: string): Promise<any> {
     return this.db.doc<Product>(`products/${id}`).update(p);
