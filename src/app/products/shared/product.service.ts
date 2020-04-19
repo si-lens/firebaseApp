@@ -20,8 +20,8 @@ export class ProductService {
       }))
     );
   }
-  getProduct(ID: string): Observable<any> {
-    return this.db.collection('products').doc(ID).valueChanges();
+  getProduct(ID: string): Promise<any> {
+    return this.db.collection('products').doc(ID).snapshotChanges().toPromise();
   }
   create(product: Product): Promise<any> {
     product.timesPurchased = 0;

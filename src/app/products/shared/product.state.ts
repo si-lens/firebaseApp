@@ -2,17 +2,24 @@ import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {tap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {ProductService} from './product.service';
-import {CreateProduct, DeleteProduct, GetProducts, UpdateProduct} from './product.actions';
+import {
+  CreateProduct,
+  DeleteProduct,
+  GetProducts,
+  UpdateProduct
+} from './product.actions';
 import {Product} from '../../shared/models/product';
 
 export class ProductStateModel {
   products: Product[];
+  prodToUpdate: string;
 }
 
 @State<ProductStateModel>({
   name: 'all',
   defaults: {
-    products: undefined
+    products: undefined,
+    prodToUpdate: undefined
   }
 })
 
@@ -74,6 +81,5 @@ export class ProductState {
       });
     });
   }
-
 
 }
