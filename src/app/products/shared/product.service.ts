@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
-import {User} from '../../shared/models/user.model';
+import {from, Observable} from 'rxjs';
+import {User} from '../../shared/models/user';
 import {map} from 'rxjs/operators';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Product} from '../../shared/models/product';
@@ -20,18 +20,15 @@ export class ProductService {
       }))
     );
   }
-  getProduct(ID: string): Observable<any> {
-    return this.db.collection('products').doc(ID).valueChanges();
+  getProduct(ID: string): Promise<any> {
+    return this.db.collection('products').doc(ID).snapshotChanges().toPromise();
   }
   create(product: Product): Promise<any> {
-      return this.db.collection('products').add({
-        name: product.name,
-        available: product.available,
-        price: product.price
-      });
+    product.timesPurchased = 0;
+    return this.db.collection('products').add(product);
   }
-  delete(id: string) {
-    this.db.doc<Product>(`products/${id}`).delete();
+  delete(id: string): Observable<any> {
+    return from(this.db.doc<Product>(`products/${id}`).delete());
   }
   update(p: Product, id: string): Promise<any> {
     return this.db.doc<Product>(`products/${id}`).update(p);

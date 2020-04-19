@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {ProductService} from '../shared/product.service';
 import {Product} from '../../shared/models/product';
 import {Router} from '@angular/router';
+import {Select, Store} from '@ngxs/store';
+import {DeleteProduct, GetProducts} from '../shared/product.actions';
+import {Observable} from 'rxjs';
+import {ProductState} from '../shared/product.state';
 
 
 @Component({
@@ -10,14 +14,11 @@ import {Router} from '@angular/router';
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements OnInit {
-  products: Product[];
-  constructor(private prodService: ProductService, private router: Router) { }
+  @Select(ProductState.getProducts) products: Observable<Product[]>;
+  constructor(private prodService: ProductService, private router: Router, private store: Store) { }
 
   ngOnInit() {
-  this.prodService.getProducts().subscribe( products => {
-      this.products = products;
-    }
-  );
+  this.store.dispatch(new GetProducts());
   }
 
   edit(product: Product) {
@@ -25,6 +26,7 @@ export class ProductListComponent implements OnInit {
   }
 
   remove(id: string) {
-    this.prodService.delete(id);
+    this.store.dispatch(new DeleteProduct(id));
+    //this.prodService.delete(id);
   }
 }

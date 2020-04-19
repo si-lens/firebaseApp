@@ -8,5 +8,5 @@ import {AlertService} from './shared/alert-service.service';
 })
 export class AppComponent {
   title = 'firebaseApp';
-  constructor(private alertService: AlertService){}
+  constructor(public alertService: AlertService) {}
 }

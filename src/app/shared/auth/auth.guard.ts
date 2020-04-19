@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {UserService} from '../users/shared/user.service';
-import {User} from './models/user.model';
+import {UserService} from '../../users/shared/user.service';
+import {User} from '../models/user';
 import {AuthenticationService} from './authentication.service';
 
 @Injectable({ providedIn: 'root' })

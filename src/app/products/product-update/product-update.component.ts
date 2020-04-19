@@ -4,6 +4,10 @@ import {ProductService} from '../shared/product.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Product} from '../../shared/models/product';
 import {AlertService} from '../../shared/alert-service.service';
+import {Select, Store} from '@ngxs/store';
+import {UpdateProduct} from '../shared/product.actions';
+import {ProductState} from '../shared/product.state';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-product-update',
@@ -11,38 +15,45 @@ import {AlertService} from '../../shared/alert-service.service';
   styleUrls: ['./product-update.component.scss']
 })
 export class ProductUpdateComponent implements OnInit {
+  @Select(ProductState.getProducts) products: Observable<Product[]>;
+  initialProductData: Product = undefined;
   productForm  = new FormGroup({
     name: new FormControl(''),
     price: new FormControl(''),
     available: new FormControl('')
   });
-  product: Product;
   id: string;
   constructor(private productService: ProductService,
               private route: ActivatedRoute,
               private alertService: AlertService,
-              private router: Router
+              private router: Router,
+              private store: Store
   ) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.productService.getProduct(this.id).subscribe( product => {
-      this.product = product;
-      console.log('hehehe' + this.product.name);
-      this.productForm.patchValue({
-        name: product.name,
-        price: product.price,
-        available: product.available,
+    this.products.subscribe(products => {
+        this.initialProductData = products.find(pr => pr.id === this.id);
+        this.productForm.patchValue({
+        name: this.initialProductData.name,
+        price: this.initialProductData.price,
+        available: this.initialProductData.available,
       });
-    });
+      }
+    );
   }
 
   save() {
   const formValues = this.productForm.value;
-  this.product.price = formValues.price;
-  this.product.available = formValues.available;
-  this.product.name = formValues.name;
-  this.productService.update(this.product, this.id).then( () => {
+  const product: Product = {
+    id: this.id,
+    timesPurchased: this.initialProductData.timesPurchased,
+    name: formValues.name,
+    price: formValues.price,
+    available: formValues.available
+  };
+
+  this.store.dispatch(new UpdateProduct(product, this.id)).toPromise().then( () => {
     this.alertService.successMessageShow('Product was updated.');
     this.router.navigateByUrl('profile');
   });
