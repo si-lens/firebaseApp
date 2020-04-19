@@ -16,7 +16,7 @@ import {Observable} from 'rxjs';
 })
 export class ProductUpdateComponent implements OnInit {
   @Select(ProductState.getProducts) products: Observable<Product[]>;
-  product: Product = undefined;
+  initialProductData: Product = undefined;
   productForm  = new FormGroup({
     name: new FormControl(''),
     price: new FormControl(''),
@@ -33,11 +33,11 @@ export class ProductUpdateComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.products.subscribe(products => {
-        this.product = products.find(pr => pr.id === this.id);
+        this.initialProductData = products.find(pr => pr.id === this.id);
         this.productForm.patchValue({
-        name: this.product.name,
-        price: this.product.price,
-        available: this.product.available,
+        name: this.initialProductData.name,
+        price: this.initialProductData.price,
+        available: this.initialProductData.available,
       });
       }
     );
@@ -45,10 +45,15 @@ export class ProductUpdateComponent implements OnInit {
 
   save() {
   const formValues = this.productForm.value;
-  this.product.price = formValues.price;
-  this.product.available = formValues.available;
-  this.product.name = formValues.name;
-  this.store.dispatch(new UpdateProduct(this.product, this.id)).toPromise().then( () => {
+  const product: Product = {
+    id: this.id,
+    timesPurchased: this.initialProductData.timesPurchased,
+    name: formValues.name,
+    price: formValues.price,
+    available: formValues.available
+  };
+
+  this.store.dispatch(new UpdateProduct(product, this.id)).toPromise().then( () => {
     this.alertService.successMessageShow('Product was updated.');
     this.router.navigateByUrl('profile');
   });
